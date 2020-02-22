@@ -12,7 +12,6 @@
 export default {
   data(){
     return{
-      isModalLoginOpen: false,
       insuranceTypeLists: [
         {
           name: "Страхування авто",
@@ -24,11 +23,6 @@ export default {
         }
         
       ]
-    }
-  },
-  methods:{
-    loginForm(){
-      this.isModalLoginOpen = !this.isModalLoginOpen
     }
   }
 };
@@ -51,6 +45,10 @@ li {
   max-width: 300px;
   width: 100%;
   height: 300px;
+  @media(max-width: 500px){
+    margin-bottom: 20px;
+    margin-left: 0;
+  }
 
 .insurance-image{
   top: 0;

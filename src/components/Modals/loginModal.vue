@@ -2,7 +2,7 @@
 <div class="modal">
     <div class="login-block">
         <form class="login-form" >
-            <button class="button-close-modal" @click="modalClose()"></button>
+            <button class="button-close-modal" @click="modalClose"></button>
             <h3>Login</h3>
             <input placeholder="Login"  required />
             <input type="password" placeholder="Password" required />
@@ -22,7 +22,7 @@ export default {
   },
   methods:{
    modalClose(){
-      this.$emit ('loginForm', false)
+      this.$store.dispatch("closeLoginForm")
     }
   }
 };
@@ -35,16 +35,12 @@ export default {
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.16);
+  background-color: rgba(0, 0, 0, 0.555);
   display: block;
-}
-.login-block {
-  position: relative;
-  display: flex;
-  justify-content: center;
 }
 
 .login-block {
+  position: relative;
   margin: 100px auto;
   max-width: 400px;
   border-radius: 8px;
@@ -88,7 +84,7 @@ export default {
     background-color: #ffffff;
     border: none;
     cursor: pointer;
-    background-image: url("../../src/assets/close.svg");
+    background-image: url("../../../src/assets/close.svg");
     width: 15px;
     height: 15px;
 
