@@ -3,57 +3,31 @@
     <div class="header-block">
       <div class="selector-block-title">
         <ul >
-          <li class="selector">Головна / Страхування для вас</li>
+        <li class="selector" @click="$router.push({ name: 'landingPage' })">Головна / Страхування для вас</li>
+          <li class="selector" @click="$router.push({ name: 'dashboard' })">Dashboard</li>
         </ul>
       </div>
       <div class="selector-block">
         <ul>
-          <li class="selector" @click="loginForm">Вхід</li>
-          <li class="selector" @click="registryForm">Реєстрація</li>
+          <li class="selector" >{{userName}}</li>
         </ul>
       </div>
     </div>
     <div class="insurance-block">
-      <div class="header-title">Blokchain Insuranse</div>
-      <InsuranceTypeItem/>
-      
+        <div class="header-title">Скоро буде</div>
     </div>
-    <loginModal v-if="isLoginFormDialogOpened" />
-    <Registration v-if="isRegistryFormDialogOpened"/>
+    
   </div>
 </template>
-
 <script>
-import InsuranceTypeItem from './InsuranceTypeItem';
-import loginModal from './Modals/loginModal';
-import Registration from './Modals/Registration'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 export default {
-  data(){
-    return{
-     
+    computed:{
+        ...mapGetters(["userName"])
     }
-  },
-  computed:{
-    ...mapGetters(["isLoginFormDialogOpened", "isRegistryFormDialogOpened"])
-  },
-  components:{
-    InsuranceTypeItem,
-    loginModal,
-    Registration
-  },
-  methods:{
-    loginForm(){
-      this.$store.dispatch('openLoginForm');
-    },
-    registryForm(){
-      this.$store.dispatch('openRegistryForm');
-    }
-  }
+    
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 ul {
   list-style-type: none;
@@ -95,6 +69,7 @@ justify-content: space-between;
 }
 .insurance-block{
   background-color: gray;
+  height: 800px;
   .header-title{
     padding: 50px 0;
     font-size: 36px;

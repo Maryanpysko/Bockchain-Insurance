@@ -1,12 +1,12 @@
 <template>
 <div class="modal">
     <div class="login-block">
-        <form class="login-form" >
+        <form class="login-form" @submit.prevent="login">
             <button class="button-close-modal" @click="modalClose"></button>
             <h3>Login</h3>
-            <input placeholder="Login"  required />
-            <input type="password" placeholder="Password" required />
-            <button class="submit-button">Ввійти</button>
+            <input v-model="userName" placeholder="Login"  required />
+            <input v-model="userPassword" type="password" placeholder="Password" required />
+            <button class="submit-button" @click="login">Ввійти</button>
             <a class="registry" >Реєстрація</a>
       </form>
     </div>
@@ -14,15 +14,27 @@
 </template>
 
 <script>
+import { getItem } from "../../services/localStorage";
 export default {
   data(){
     return{
-      
+      userName: '',
+      userPassword: ''
     }
   },
   methods:{
-   modalClose(){
-      this.$store.dispatch("closeLoginForm")
+    modalClose(){
+      this.$store.dispatch("closeLoginForm");
+    },
+    registryForm(){
+      this.$store.dispatch("closeLoginForm");
+      this.$store.dispatch('openRegistryForm');
+    },
+    login(){
+      let user = getItem(this.userName);
+      this.$store.dispatch("loginUser", user);
+      this.$router.push({ name: 'dashboard' });
+      this.$store.dispatch("closeLoginForm");
     }
   }
 };
@@ -73,6 +85,7 @@ export default {
   width: 100%;
   color: white;
   background-color: #09489c;
+  cursor: pointer;
 }
 .registry {
   text-decoration: underline;

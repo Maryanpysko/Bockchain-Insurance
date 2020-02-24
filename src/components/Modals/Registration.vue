@@ -3,14 +3,13 @@
     <div class="registration-block">
       <div class="registry-block">
         <button class="button-close-modal" @click="closeModal"></button>
-        <form class="registry-form" >
+        <form class="registry-form" @submit.prevent="registry" >
           <h1>Registry</h1>
-          <input placeholder="Username"  required />
-          <input type="password"  placeholder="Password" required />
-          <input type="password"  placeholder="Repeat password" required />
-          <button class="submit-button" @click="closeModal">Зареєструватись</button>
-          <p>or</p>
-          <a class="login-ref" >Login</a>
+          <input v-model="userName" placeholder="User name"  required />
+          <input v-model="password" type="password"  placeholder="Password" required />
+          <input v-model="repeatPassword" type="password"  placeholder="Repeat password" required />
+          <button class="submit-button" >Зареєструватись</button>
+          <a class="login-ref" @click="loginForm">Login</a>
         </form>
     </div>
     </div>
@@ -18,9 +17,28 @@
 </template>
 <script>
 export default {
+    data(){
+      return{
+        userName: '',
+        password: '',
+        repeatPassword: ''
+      }
+    },
     methods: {
-      closeModal(){
-        this.$store.dispatch('closeRegistryForm')
+      closeModal() {
+        this.$store.dispatch('closeRegistryForm');
+      },
+      loginForm() {
+        this.$store.dispatch('closeRegistryForm');
+        this.$store.dispatch('openLoginForm');
+      },
+      registry() {
+         this.$store.dispatch('registerNewUser',{
+          name: this.userName,
+          password: this.password
+        });
+         this.$router.push({ name: 'dashboard' });
+         this.$store.dispatch('closeRegistryForm');
       }
     }
 }
@@ -44,7 +62,7 @@ export default {
   position: relative;
   margin: 0 auto;
   width: 450px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px rgba(202, 202, 202, 0.5) solid;
   -webkit-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.15);
@@ -78,8 +96,10 @@ export default {
   width: 100%;
   color: white;
   background-color: #09489c;
+  cursor: pointer;
 }
 .login-ref {
+  margin-top: 20px;
   text-decoration: underline;
   cursor: pointer;
 }

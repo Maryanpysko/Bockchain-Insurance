@@ -3,7 +3,7 @@
           <li v-for="(list,index) in insuranceTypeLists" :key="index" class="insurance-type">
             <div  class="insurance-title">{{list.name}}</div>
             <div class="insurance-image" :class="list.img"></div>
-            <button class="insurance-button">Купити</button>
+            <button class="insurance-button" @click="authorization">Купити</button>
           </li>
       </div>
 </template>
@@ -23,6 +23,11 @@ export default {
         }
         
       ]
+    }
+  },
+  methods: {
+    authorization() {
+      this.$store.dispatch('openLoginForm');
     }
   }
 };
