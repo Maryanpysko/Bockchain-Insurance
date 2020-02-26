@@ -5,9 +5,10 @@
             <button class="button-close-modal" @click="modalClose"></button>
             <h3>Login</h3>
             <input v-model="userName" placeholder="Login"  required />
+            <div v-if="isUserNoRegistry" class="wrong-user-name">Цей користувач незареєстрований</div>
             <input v-model="userPassword" type="password" placeholder="Password" required />
             <button class="submit-button" @click="login">Ввійти</button>
-            <a class="registry" >Реєстрація</a>
+            <a class="registry" @click="registryForm">Реєстрація</a>
       </form>
     </div>
 </div>
@@ -19,7 +20,8 @@ export default {
   data(){
     return{
       userName: '',
-      userPassword: ''
+      userPassword: '',
+      isUserNoRegistry: false
     }
   },
   methods:{
@@ -32,10 +34,13 @@ export default {
     },
     login(){
       let user = getItem(this.userName);
+      if (!user) {
+        return this.isUserNoRegistry = true;
+      }
       this.$store.dispatch("loginUser", user);
       this.$router.push({ name: 'dashboard' });
       this.$store.dispatch("closeLoginForm");
-    }
+    },
   }
 };
 </script>
@@ -68,7 +73,7 @@ export default {
 }
 .login-form input {
   margin-top: 40px;
-  width: 100%;
+  width: calc(100% - 40px);
   padding: 10px;
 }
 .login-form p {
@@ -101,6 +106,12 @@ export default {
     width: 15px;
     height: 15px;
 
+}
+.wrong-user-name{
+  margin: 5px 0;
+  text-align: center;
+  font-size: 12px;
+  color: red;
 }
 
 </style>

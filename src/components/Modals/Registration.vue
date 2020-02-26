@@ -61,7 +61,7 @@ export default {
 .registry-block {
   position: relative;
   margin: 0 auto;
-  width: 450px;
+  max-width: 450px;
   border-radius: 8px;
   border: 1px rgba(202, 202, 202, 0.5) solid;
   -webkit-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.15);
@@ -79,7 +79,7 @@ export default {
 }
 .registry-form input {
   margin-top: 40px;
-  width: 100%;
+  width: calc(100% - 40px);
   padding: 10px;
 }
 .registry-form p {

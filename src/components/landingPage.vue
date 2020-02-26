@@ -3,7 +3,7 @@
     <div class="header-block">
       <div class="selector-block-title">
         <ul >
-          <li class="selector">Головна / Страхування для вас</li>
+          <li class="selector">Головна</li>
         </ul>
       </div>
       <div class="selector-block">

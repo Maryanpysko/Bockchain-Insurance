@@ -30,7 +30,6 @@ const actions = {
         commit(UPDATE_USER, userUpdate)
     },
     registerNewUser({commit}, user) {
-        console.log(user)
         let newUser = new UserModel(user);
         updateUserLocalStorage(newUser);
         commit(UPDATE_USER, newUser);

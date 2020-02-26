@@ -3,7 +3,7 @@
     <div class="header-block">
       <div class="selector-block-title">
         <ul >
-        <li class="selector" @click="$router.push({ name: 'landingPage' })">Головна / Страхування для вас</li>
+        <li class="selector" @click="$router.push({ name: 'landingPage' })">Головна</li>
           <li class="selector" @click="$router.push({ name: 'dashboard' })">Dashboard</li>
         </ul>
       </div>
@@ -14,18 +14,23 @@
       </div>
     </div>
     <div class="insurance-block">
-        <div class="header-title">Скоро буде</div>
+        <div class="header-title">Виберіть страхування</div>
+        <InsuranceInfo/>
     </div>
     
   </div>
 </template>
 <script>
+
 import {mapGetters} from 'vuex'
+import InsuranceInfo from './Dashboard/InsuranceInfo.vue'
 export default {
     computed:{
         ...mapGetters(["userName"])
+    },
+    components: {
+      InsuranceInfo
     }
-    
 }
 </script>
 <style lang="less" scoped>
@@ -68,7 +73,7 @@ justify-content: space-between;
 }
 }
 .insurance-block{
-  background-color: gray;
+  background-color: rgba(110, 101, 101, 0.459);
   height: 800px;
   .header-title{
     padding: 50px 0;
