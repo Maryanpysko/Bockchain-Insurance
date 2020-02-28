@@ -15,7 +15,10 @@
     </div>
     <div class="insurance-block">
         <div class="header-title">Виберіть страхування</div>
-        <InsuranceInfo/>
+        <div class="insurance-info">
+          <InsuranceInfo :insuranceName="insuranceTypes[0]"/>
+          <InsuranceInfo :insuranceName="insuranceTypes[1]"/>
+        </div>
     </div>
     
   </div>
@@ -25,6 +28,40 @@
 import {mapGetters} from 'vuex'
 import InsuranceInfo from './Dashboard/InsuranceInfo.vue'
 export default {
+  data(){
+  return{
+    insuranceTypes: [{
+      name: "Страхування авто",
+      pricing: [{
+        name:"1 Місяць",
+        price: 0.02
+      },
+      {
+        name:"6 Місяців",
+        price: 0.04
+      },
+      {
+        name:"12 Місяців",
+        price: 0.09
+      }]
+    },
+    {
+      name:"Cтрахування здоров'я",
+      pricing: [{
+        name:"1 Місяць",
+        price: 0.01
+      },
+      {
+        name:"6 Місяців",
+        price: 0.03
+      },
+      {
+        name:"12 Місяців",
+        price: 0.07
+      }]
+    }],
+  }
+  },
     computed:{
         ...mapGetters(["userName"])
     },
@@ -83,5 +120,8 @@ justify-content: space-between;
     text-align: center;
 }
 }
-
+.insurance-info{
+  display: flex;
+  justify-content: center;
+}
 </style>

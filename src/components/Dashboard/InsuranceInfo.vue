@@ -1,23 +1,25 @@
 <template>
-<div class="insurans-container">
-    <div class="insurans-type-container">
-        <div v-for="(insuranceType,index) in insuranceTypes" :key="index" class="insurans-type">
-            <div class="insuranse-title">{{insuranceType}}
+        <div  class="insurans-type">
+            <div class="insuranse-title">{{insuranceName.name}}
                 <button class="insuranse-button" @click="insuranceMenu">+</button>
             </div>
-            <div v-if="isMenuOpen" class="insuranse-menu"></div>
+            <InsurenseMenu v-if="isMenuOpen" :insurancePricing="insuranceName.pricing"/>
         </div>
-    </div>
-</div>
 </template>
 
 <script>
+import InsurenseMenu from './InsurenseMenuInfo'
 export default {
     data(){
         return{
-            insuranceTypes: ["Страхування авто", "Cтрахування здоров'я"],
             isMenuOpen: false
         }
+    },
+    props:{
+        insuranceName: Object
+    },
+    components:{
+    InsurenseMenu
     },
     methods: {
         insuranceMenu(){
@@ -29,13 +31,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.insurans-type-container{
-    display: flex;
-    justify-content: center;
-    @media(max-width: 500px){
-        flex-wrap: wrap;
-    }
-}
 .insurans-type{
     position: relative;
     max-width: 500px;
