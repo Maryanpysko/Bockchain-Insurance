@@ -2,7 +2,7 @@
     <div class="insuranse-menu">
         <div v-for="(insurancePrice, index) in insurancePricing" :key="index" class="block">
             <div class="block-item name">{{insurancePrice.name}}</div>
-            <div class="block-item price">{{insurancePrice.price}}  Ethereum</div>
+            <div class="block-item price">{{insurancePrice.price}}  Ethereum/ETH</div>
             <button class="block-item button">Купити</button>
         </div>
     </div>
