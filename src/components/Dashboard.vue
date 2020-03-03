@@ -19,14 +19,16 @@
           <InsuranceInfo :insuranceName="insuranceTypes[0]"/>
           <InsuranceInfo :insuranceName="insuranceTypes[1]"/>
         </div>
+        <InsurancePolicy/>
     </div>
     
   </div>
 </template>
 <script>
 
-import {mapGetters} from 'vuex'
-import InsuranceInfo from './Dashboard/InsuranceInfo.vue'
+import {mapGetters} from 'vuex';
+import InsuranceInfo from './Dashboard/InsuranceInfo.vue';
+import InsurancePolicy from './Dashboard/InsuransePolicy';
 export default {
   data(){
   return{
@@ -66,7 +68,8 @@ export default {
         ...mapGetters(["userName"])
     },
     components: {
-      InsuranceInfo
+      InsuranceInfo,
+      InsurancePolicy
     }
 }
 </script>
@@ -123,5 +126,8 @@ justify-content: space-between;
 .insurance-info{
   display: flex;
   justify-content: center;
+  @media(max-width: 850px){
+    display: block
+  }
 }
 </style>

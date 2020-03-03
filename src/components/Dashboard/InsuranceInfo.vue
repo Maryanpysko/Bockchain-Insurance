@@ -40,10 +40,11 @@ export default {
     margin-left: 40px;
     border: 2px solid rgb(78, 74, 74);
     border-radius: 4px ;
-    @media(max-width: 500px) {
+    @media(max-width: 850px) {
         margin-left: 10px;
         margin-right: 10px;
-        margin-bottom: 20px
+        margin-bottom: 20px;
+        max-width: 700;
         
     }
 }
