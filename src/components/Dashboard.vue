@@ -21,6 +21,7 @@
         <div class="grid">
             <TransactioGrid/>
         </div>
+        <InsurancePolicy/>
     </div>
   </div>
 </template>
@@ -109,6 +110,9 @@ justify-content: space-between;
 .insurance-info{
   display: flex;
   justify-content: center;
+  @media(max-width: 850px){
+    display: block
+  }
 }
 .grid{
   margin-top: 200px;

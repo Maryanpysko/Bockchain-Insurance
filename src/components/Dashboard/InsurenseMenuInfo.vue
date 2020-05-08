@@ -70,6 +70,9 @@ export default {
     background-color: #ffffff;
     border: 2px solid rgb(78, 74, 74);
     border-radius: 4px;
+    @media(max-width: 850px){
+        max-width: 700px;
+    }
 }
 .block{
     line-height: 60px;
