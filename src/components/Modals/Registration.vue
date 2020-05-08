@@ -16,6 +16,7 @@
 </div>
 </template>
 <script>
+import { setItem } from "../../services/localStorage";
 export default {
     data(){
       return{
@@ -37,6 +38,7 @@ export default {
           name: this.userName,
           password: this.password
         });
+         setItem('userName', this.userName);
          this.$router.push({ name: 'dashboard' });
          this.$store.dispatch('closeRegistryForm');
       }

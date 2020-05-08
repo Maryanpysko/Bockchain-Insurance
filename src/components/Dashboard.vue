@@ -17,16 +17,17 @@
         <div class="header-title">Виберіть страхування</div>
         <div class="insurance-info">
           <InsuranceInfo :insuranceName="insuranceTypes[0]"/>
-          <InsuranceInfo :insuranceName="insuranceTypes[1]"/>
+        </div>
+        <div class="grid">
+            <TransactioGrid/>
         </div>
     </div>
-    
   </div>
 </template>
 <script>
-
-import {mapGetters} from 'vuex'
-import InsuranceInfo from './Dashboard/InsuranceInfo.vue'
+import TransactioGrid from './Dashboard/TransactionGrid/TransactionGrid'
+import InsuranceInfo from './Dashboard/InsuranceInfo.vue';
+import { getItem } from "../services/localStorage";
 export default {
   data(){
   return{
@@ -34,39 +35,24 @@ export default {
       name: "Страхування авто",
       pricing: [{
         name:"1 Місяць",
-        price: 0.02
-      },
-      {
-        name:"6 Місяців",
-        price: 0.04
+        price: 0.05,
+        termId: 0
       },
       {
         name:"12 Місяців",
-        price: 0.09
-      }]
-    },
-    {
-      name:"Cтрахування здоров'я",
-      pricing: [{
-        name:"1 Місяць",
-        price: 0.01
-      },
-      {
-        name:"6 Місяців",
-        price: 0.03
-      },
-      {
-        name:"12 Місяців",
-        price: 0.07
+        price: 0.2,
+        termId: 0
       }]
     }],
+    userName:  ''
   }
   },
-    computed:{
-        ...mapGetters(["userName"])
-    },
-    components: {
-      InsuranceInfo
+  components: {
+    InsuranceInfo,
+    TransactioGrid
+  },
+  mounted(){
+      this.userName = getItem('userName')
     }
 }
 </script>
@@ -121,6 +107,11 @@ justify-content: space-between;
 }
 }
 .insurance-info{
+  display: flex;
+  justify-content: center;
+}
+.grid{
+  margin-top: 200px;
   display: flex;
   justify-content: center;
 }

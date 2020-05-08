@@ -3,23 +3,60 @@
         <div v-for="(insurancePrice, index) in insurancePricing" :key="index" class="block">
             <div class="block-item name">{{insurancePrice.name}}</div>
             <div class="block-item price">{{insurancePrice.price}}  Ethereum</div>
-            <button class="block-item button">Купити</button>
+            <button class="block-item button" @click="modalEntered(insurancePrice,index)">Купити</button>
         </div>
+        <BuyInsurance v-if="isBuyInsuranceDialogOpened" @buyPolice="buyPolice" :insurancePrice="insurancePrice"/>
     </div>
 </template>
 
 <script>
+import { ethers } from "ethers";
+import Web3 from 'web3'
+import BuyInsurance from '..//Modals/BuyInsurance';
+import { contract, provider, parseUnits } from "../../services/ContractServices";
+import { mapGetters } from 'vuex';
+import { getItem, setItem } from '../../services/localStorage';
 export default {
     data(){
         return{
-            
+            termId: '',
+            insurancePrice: {}
         }
     },
+    computed: {
+        ...mapGetters(["isBuyInsuranceDialogOpened"])
+    },
     props:{
-        insurancePricing: Object
+        insurancePricing: Array
+    },
+    components: {
+        BuyInsurance
     },
     methods: {
-       
+        modalEntered(insurancePrice,index) {
+            this.insurancePrice = insurancePrice
+            console.log(index)
+            this.termId = index;
+            this.$store.dispatch('openBuyInsurance');
+        },
+        async buyPolice(obj) {
+            const  wallet = new ethers.Wallet(obj.privateKey, provider);
+            const contractWithSigner =  contract.connect(wallet);
+            let productName = obj.carBrand + ' ' + obj.regNumber
+            let price = this.insurancePrice.price.toString()
+            const weiValue = Web3.utils.toWei(price, 'ether');
+            let ovverides = {
+                value: parseUnits(weiValue)
+            };
+            let tx = await contractWithSigner.buyPolice(productName, this.termId, ovverides);
+            obj.hash = tx.hash;
+            obj.validity = this.insurancePrice.name
+            obj.url = "https://ropsten.etherscan.io/tx/" + tx.hash
+            let userName = getItem('userName')
+            setItem(userName,obj)
+            this.$store.dispatch('transactionHash',obj)
+            window.open("https://ropsten.etherscan.io/tx/" + tx.hash);
+        }
     }
     
 }
@@ -29,7 +66,7 @@ export default {
 .insuranse-menu{
     max-width: 500px;
     width: 100%;
-    height: 300px;
+    height: 200px;
     background-color: #ffffff;
     border: 2px solid rgb(78, 74, 74);
     border-radius: 4px;

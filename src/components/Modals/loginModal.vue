@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getItem } from "../../services/localStorage";
+import { getItem, setItem } from "../../services/localStorage";
 export default {
   data(){
     return{
@@ -37,6 +37,7 @@ export default {
       if (!user) {
         return this.isUserNoRegistry = true;
       }
+      setItem('userName', this.userName);
       this.$store.dispatch("loginUser", user);
       this.$router.push({ name: 'dashboard' });
       this.$store.dispatch("closeLoginForm");
