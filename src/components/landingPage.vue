@@ -121,7 +121,7 @@ justify-content: space-between;
 .selector-block{
   display: flex;
   margin-right: 10px;
-  @media(max-width: 500px) {
+  @media(max-width: 350px) {
     display: none
   }
 }

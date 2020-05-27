@@ -7,7 +7,7 @@
             <input v-model="userName" placeholder="Login"  required />
             <div v-if="isUserNoRegistry" class="wrong-user-name">Цей користувач незареєстрований</div>
             <input v-model="userPassword" type="password" placeholder="Password" required />
-            <button class="submit-button" @click="login">Ввійти</button>
+            <button class="submit-button" @click="login">Увійти</button>
             <a class="registry" @click="registryForm">Реєстрація</a>
       </form>
     </div>
