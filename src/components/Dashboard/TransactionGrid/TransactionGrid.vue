@@ -47,6 +47,7 @@ thead {
 }
 table{
     border-spacing: 0;
+    margin: 0 auto;
 }
 .table{background-color: white;}
 

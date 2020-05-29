@@ -16,18 +16,25 @@
     <div class="insurance-block">
         <div class="header-title">Виберіть страхування</div>
         <div class="insurance-info">
-          <InsuranceInfo :insuranceName="insuranceTypes[0]"/>
+          <InsuranceInfo 
+          :insuranceName="insuranceTypes[0]"
+          @insuranceMenu="insuranceMenu"/>
+          <InsurenseMenu
+           v-if="isMenuOpen"
+          :insurancePricing="insuranceTypes[0].pricing"
+          />
         </div>
         <div class="grid">
             <TransactioGrid/>
         </div>
-        <InsurancePolicy/>
+
     </div>
   </div>
 </template>
 <script>
 import TransactioGrid from './Dashboard/TransactionGrid/TransactionGrid'
 import InsuranceInfo from './Dashboard/InsuranceInfo.vue';
+import InsurenseMenu from "./Dashboard/InsurenseMenuInfo";
 import { getItem } from "../services/localStorage";
 export default {
   data(){
@@ -45,12 +52,19 @@ export default {
         termId: 0
       }]
     }],
-    userName:  ''
+    userName:  '',
+    isMenuOpen: false
   }
   },
   components: {
     InsuranceInfo,
-    TransactioGrid
+    TransactioGrid,
+    InsurenseMenu
+  },
+  methods: {
+    insuranceMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    }
   },
   mounted(){
       this.userName = getItem('userName')
@@ -108,15 +122,16 @@ justify-content: space-between;
 }
 }
 .insurance-info{
-  display: flex;
-  justify-content: center;
   @media(max-width: 850px){
     display: block
   }
 }
 .grid{
-  margin-top: 200px;
-  display: flex;
-  justify-content: center;
+  margin-top: 50px;
+  overflow-y: auto;
+  @media(max-width: 500px) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 </style>

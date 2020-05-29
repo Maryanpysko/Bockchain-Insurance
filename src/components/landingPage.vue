@@ -31,10 +31,11 @@ import loginModal from './Modals/loginModal';
 import Registration from './Modals/Registration'
 import { mapGetters } from 'vuex';
 import { ethers } from 'ethers';
+import { setItem } from '../services/localStorage';
 export default {
   data(){
     return{
-     
+      user: setItem('userName')
     }
   },
   computed:{

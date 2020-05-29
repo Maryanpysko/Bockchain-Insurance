@@ -65,14 +65,11 @@ export default {
 <style lang="less" scoped>
 .insuranse-menu{
     max-width: 500px;
-    width: 100%;
-    height: 200px;
     background-color: #ffffff;
     border: 2px solid rgb(78, 74, 74);
     border-radius: 4px;
-    @media(max-width: 850px){
-        max-width: 700px;
-    }
+    margin: 0 auto;
+
 }
 .block{
     line-height: 60px;

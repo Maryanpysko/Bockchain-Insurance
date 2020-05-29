@@ -4,31 +4,25 @@
       {{insuranceName.name}}
       <button class="insuranse-button" @click="insuranceMenu">+</button>
     </div>
-    <InsurenseMenu
-      v-if="isMenuOpen"
-      :insurancePricing="insuranceName.pricing"
-    />
+    
   </div>
 </template>
 
 <script>
-import InsurenseMenu from "./InsurenseMenuInfo";
+
 
 export default {
   data() {
     return {
-      isMenuOpen: false
+      
     };
   },
   props: {
     insuranceName: Object
   },
-  components: {
-    InsurenseMenu
-  },
   methods: {
     insuranceMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
+     this.$emit("insuranceMenu")
     }
   },
   mounted() {
@@ -56,12 +50,12 @@ export default {
 .insurans-type {
   position: relative;
   max-width: 500px;
-  width: 100%;
   height: 60px;
   background-color: #ffffff;
   margin-left: 40px;
   border: 2px solid rgb(78, 74, 74);
   border-radius: 4px;
+  margin: 0 auto;
   @media (max-width: 500px) {
     margin-left: 10px;
     margin-right: 10px;
